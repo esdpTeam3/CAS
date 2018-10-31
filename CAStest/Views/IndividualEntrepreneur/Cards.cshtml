@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CAStest.Models.IndividualEntrepreneur>
+
+@{
+    ViewData["Title"] = "Cards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="width:100%; position:absolute; left:0px;">
+    <h2 style="color:#066023; width:70%;" class="bigGreenCaption">Индивидуальные предприниматели</h2>
+    <div class="controlPanel">
+        <div class="buttonWrap">
+            <div class='addingButton'><a title="Добавить физическое лицо" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить физическое лицо" class='icon1'></a></div>
+            <div class='tableButton'><a title="Списком" asp-action="Index" asp-controller="IndividualEntrepreneur"><img src='~/images/material/list.png' alt="Списком" class='icon1'></a></div>
+        </div>
+
+        <div class='search'>
+            @using (Html.BeginForm())
+            {
+                <p>
+                    @Html.TextBox("SearchString")
+                    <button type="submit" title="Поиск" class="btn-link button-icon"><img src='~/images/material/search.png' alt="Поиск" class='searcherImg icon'></button>
+                </p>
+            }
+        </div>
+    </div>
+
+
+
+
+    <div class='tableBlock ' style="width:95%">
+        @foreach (var item in Model)
+        {
+            <div class='individualCardGray'>
+                <p class='textInIndividualCards'><b>@Html.DisplayFor(modelItem => item.Fullname)</b></p>
+                <span class='textInIndividualCards'>ИНН:</span>
+                <span class='textInIndividualCards'>@Html.DisplayFor(modelItem => item.Inn)</span>
+                <br />
+                <span class='textInIndividualCards'>Адрес:</span>
+                <span class='textInIndividualCards'>@Html.DisplayFor(modelItem => item.Address)</span>
+                <br />
+                <div class='menuForIndividuslCards'>
+                    <a asp-action="Edit" asp-controller="IndividualEntrepreneur" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                    <a asp-action="Details" asp-controller="IndividualEntrepreneur" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/more.png' alt="Подробнее" class='icon3'></a>
+                    @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                    {
+                        if (item.IsBlocked)
+                        {
+                            <button asp-action="unBlock" asp-controller="IndividualEntrepreneur" asp-route-id="@item.Id" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Разблокировать"><img src='~/images/material/lock.png' alt="Разблокировать" class='icon3'></button>
+                        }
+                        else
+                        {
+                            <button asp-action="Block" asp-controller="IndividualEntrepreneur" asp-route-id="@item.Id" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Заблокировать"><img src='~/images/material/unlock.png' alt="Заблокировать" class='icon3'></button>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

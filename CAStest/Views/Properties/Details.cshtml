@@ -1,0 +1,30 @@
+﻿@model CAStest.Models.Property
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href='javascript:history.go(-1)' title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Расширяемое поле</h2>
+
+<div>
+    <h4>Детальная информация</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Тип
+        </dt>
+        <dd>
+            Название
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PropertyType.Id)
+        </dd>
+    </dl>
+</div>

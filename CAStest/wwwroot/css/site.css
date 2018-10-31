@@ -1,0 +1,677 @@
+﻿body {
+    padding-top: 50px;
+    //padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.left-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+    width: 30%;
+}
+
+.right-block {
+    padding-left: 15px;
+    padding-right: 15px;
+    float: right;
+    width: 70%;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+
+/*.navbar-fs-top {
+    border-bottom: solid;
+    border-bottom-color: #C0C0C0;
+    background-color: white;
+}*/
+
+.nav-left-panel {
+    background-color: #2F4F4F;
+}
+
+.btn-inside-text {
+    color: white;
+}
+
+.footer {
+    width: 100%;
+    height: 60px;
+    background-color: #1D1D1B;
+}
+
+main {
+    min-height: calc(100vh - 110px);
+}
+
+.footer-text {
+    color: white;
+    font-size: small;
+    float: right;
+    margin-right: 100px;
+}
+
+.pink-button {
+    background-color: #CA0039;
+}
+
+.modal_div {
+    width: 500px;
+    height: 550px; /* Рaзмеры дoлжны быть фиксирoвaны */
+    border-radius: 5px;
+    border: 3px #000 solid;
+    background: #fff;
+    position: fixed; /* чтoбы oкнo былo в видимoй зoне в любoм месте */
+    top: 45%; /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
+    left: 50%; /* пoлoвинa экрaнa слевa */
+    margin-top: -275px;
+    margin-left: -250px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
+    display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
+    opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
+    z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
+    padding: 20px 10px;
+}
+    /* Кнoпкa зaкрыть для тех ктo в тaнке) */
+    .modal_div .modal_close {
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        display: block;
+    }
+/* Пoдлoжкa */
+#overlay {
+    z-index: 3; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+    position: fixed; /* всегдa перекрывaет весь сaйт */
+    background-color: #000; /* чернaя */
+    opacity: 0.8; /* нo немнoгo прoзрaчнa */
+    -moz-opacity: 0.8; /* фикс прозрачности для старых браузеров */
+    filter: alpha(opacity=80);
+    width: 100%;
+    height: 100%; /* рaзмерoм вo весь экрaн */
+    top: 0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+    left: 0;
+    cursor: pointer;
+    display: none; /* в oбычнoм сoстoянии её нет) */
+}
+/*.open_modal {
+    background: #e9e9ce;
+    border: 1px solid #333; 
+    display: inline-block;
+    padding: 5px 15px; 
+    text-decoration: none;
+    color: #000; 
+}
+.open_modal:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); 
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); 
+    text-decoration: none;
+    color: #a00;
+   }*/
+.nav-user-link {
+    margin: -5px 0px -5px 0px;
+    padding: 20px 30px 20px 30px;
+    border-radius: 4px;
+    padding: 50px;
+    border: 1px solid #337ab7;
+    color: #066023;
+    font-size: 15px;
+    text-decoration: none;
+    background-color: #eee;
+}
+
+.nav-user-text {
+    color: #066023;
+}
+
+.menu-user {
+    position: absolute; /* Абсолютное позиционирование */
+    right: 0; /* Положение от правого края окна */
+    top: 30px; /* Положение от верхнего края */
+    width: 200px; /* Ширина колонки */
+}
+
+
+
+A {
+    color: #2f4f4f;
+}
+
+    A:hover {
+        color: #CA0039;
+        text-decoration: none;
+    }
+
+.absoluteClass {
+    position: absolute;
+}
+
+.addingButtonText {
+    position: absolute;
+    top: 10px;
+    vertical-align: middle;
+    left: 60px;
+}
+
+.addingButton {
+    margin-left: 20px;
+    margin-top: 16px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.bigGreenCaption {
+    margin: 20px;
+}
+
+.blockUnlockBtn {
+    position: relative;
+    left: -1px;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.bodyContent {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
+.boxForUsername {
+    width: 250px;
+    height: 24px;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.bodyBlock {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.button-icon {
+    position: absolute;
+    top: -3px;
+    right: 0px;
+}
+
+.buttonWrap {
+}
+
+.centerBlock {
+    width: 60%;
+    height: 100%;
+    margin: 0;
+}
+
+.caption {
+    top: 50px;
+    left: 10px;
+}
+
+.contentOfUserCards {
+    width: 90%;
+    height: 80px;
+    position: absolute;
+}
+
+.controlPanel {
+    width: 100%;
+    height: 40px;
+}
+
+.footerbox {
+    width: 100%;
+    height: 60px;
+    background-color: #1D1D1B;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    z-index: 1;
+}
+
+.footerText {
+    color: white;
+    font-size: small;
+    float: right;
+    margin-right: 100px;
+}
+
+.header {
+    height: 40px;
+    width: 100%;
+    /* border: 1px solid black; */
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    box-shadow: 0 0 10px #bebebe;
+}
+
+.icon {
+    height: 24px;
+    width: 24px;
+}
+
+.icon1 {
+    height: 30px;
+    width: 30px;
+}
+
+.icon2 {
+    height: 40px;
+    width: 40px;
+}
+
+.icon3 {
+    height: 18px;
+    width: 18px;
+}
+
+.iconsInBoxForUsername {
+    position: absolute;
+    right: 5px;
+    height: 24px;
+    width: 78px;
+    line-height: 100%;
+}
+
+.individualCardGray {
+    width: 184px;
+    height: 180px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    margin: 20px;
+    display: inline-block;
+    background-color: #f2f2f2;
+    vertical-align: top;
+}
+
+.individualCardGreen {
+    width: 184px;
+    height: 330px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    margin: 20px;
+    display: inline-block;
+    background-color: #cdffe2;
+    vertical-align: top;
+}
+
+.individualCardRed {
+    width: 184px;
+    height: 330px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    margin: 20px;
+    display: inline-block;
+    background-color: #fdaca1;
+    vertical-align: top;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+.logoForLogin {
+    display: block;
+    margin: 0 auto;
+    width: 353px;
+}
+
+.logoImageForLogin {
+    height: 18px;
+    width: 353px;
+}
+
+li {
+    list-style-type: none;
+    height: 15px;
+    margin: 10px;
+}
+
+.loginButton {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.loginText {
+    color: #2f4f4f;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.loginInput {
+    border: 1px solid #969696;
+    border-radius: 5px;
+    height: 30px;
+    width: 235px;
+    display: block;
+    margin: 0;
+    padding-left: 5px;
+}
+
+.loginComponent {
+    width: 250px;
+    height: 330px;
+    padding: 20px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 60px;
+    background-color: #f1f1f1;
+}
+
+.mask {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #969696;
+    border-radius: 25px;
+}
+
+.mainBlockForLogin {
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+}
+
+.menuForCards {
+    width: 20px;
+    height: 65px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.menuForIndividuslCards {
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    bottom: 15px;
+    left: 55px;
+}
+
+/*.navigManageBlock{
+    border: 1px solid #d1d1d1;
+}*/
+
+.navigManageBlockButton {
+    border: 2px solid #2f4f4f;
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    line-height: 40px;
+    color: #2f4f4f;
+}
+
+.navigbar {
+    height: 500px;
+    position: absolute;
+    top: 30px;
+    width: 100%;
+}
+
+.navigbarList {
+    border: 1px solid #969696;
+    width: 100%;
+    padding: 0;
+    position: relative;
+    /* border: 1px solid #CA0039; */
+    /* border-radius: 5px; */
+}
+
+.navigbarUsers {
+    height: 90px;
+}
+
+.navigbarCP {
+    height: 140px;
+}
+
+.navigbarContacts {
+    height: 90px;
+}
+
+.navigbarContracts {
+    height: 140px;
+}
+
+.navigbarCaption {
+    font-size: 20px;
+    /* font-weight: bold; */
+    background-color: #2f4f4f;
+    /*background-color: #093f2a;*/
+    color: white;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 45px;
+    width: 100%;
+    margin: 0px;
+}
+
+.navigbarCaptionText {
+    text-align: center;
+    display: block;
+    line-height: 45px;
+    margin: 0px;
+    right: 0px;
+}
+
+.navigbarItem {
+    position: relative;
+}
+
+#registerInput {
+    height: 35px;
+    width: 300px;
+}
+
+.renderBlock {
+    position: absolute;
+    right: 1px;
+    width: 80%;
+    height: 1000px;
+    padding: 0px 20px 0px 20px;
+    top: 70px;
+}
+
+.rightPanel {
+    width: 20%;
+    height: 467px;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+.search {
+    float: right;
+    width: 250px;
+    position: relative;
+    height: 30px;
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 12px;
+    top: 2px;
+}
+
+.buttonWrap {
+    float: left;
+}
+
+.searchBlock {
+    width: 100%;
+    height: 110px;
+    border: 1px solid #969696;
+}
+
+.searchingInput {
+    border: 1px solid black;
+    height: 24px;
+    width: 85%;
+    padding: 0px;
+    position: absolute;
+    top: 2px;
+}
+
+.searcherImg {
+    width: 24px;
+    height: 24px;
+    margin: 3px;
+    position: absolute;
+    right: 5px;
+}
+
+.sortBlock {
+    width: 100%;
+    height: 350px;
+    border: 1px solid #969696;
+    margin-top: 16px;
+}
+
+.sortBlockContent {
+    margin-left: 5px;
+    width: 100%;
+}
+
+.sortButton {
+    position: relative;
+    left: 33%;
+}
+
+.tableButton {
+    display: inline-block;
+}
+
+.tableBlock {
+    margin: 20px;
+}
+
+.tableUserList {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    background: white;
+    max-width: 70%;
+    width: 70%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tableUserListTh {
+    font-weight: normal;
+    color: #000000;
+    border-bottom: 2px solid #7c7c7c;
+    padding: 10px 8px;
+}
+
+.tableUserListTd {
+    border-bottom: 1px solid #ccc;
+    color: #7a7a7a;
+    padding: 9px 8px;
+    transition: .3s linear;
+}
+
+.tableUserListTr:hover td {
+    color: #CA0039;
+}
+
+.textInIndividualCards {
+    text-align: center;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.userCard {
+    width: 31%;
+    height: 110px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    background-color: #f2f2f2;
+    margin: 10px;
+    display: inline-block;
+}
+
+.userName {
+    width: 150px;
+    height: 24px;
+    position: absolute;
+}
+
+.userSettingsIcon {
+    position: absolute;
+    left: 0px;
+}
+
+.userLogoutIcon {
+    position: absolute;
+    right: 0px;
+}
+
+/* #ffe8e5 - красный */
+/* #2f4f4f - темно-зеленый */
+/* #e5fff0 - светло-зеленый */
+/* #CA0039 - розовый */

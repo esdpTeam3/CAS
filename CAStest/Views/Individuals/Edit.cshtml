@@ -1,0 +1,78 @@
+﻿@model CAStest.Models.Individual
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a asp-action="Index" asp-controller="Individuals" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2 style="color:#066023">Изменение физического лица</h2>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Fullname" class="control-label">ФИО</label>
+        <br />
+        <input asp-for="Fullname" id="registerInput" />
+        <span asp-validation-for="Fullname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Inn" class="control-label">ИНН</label>
+        <br />
+        <input asp-for="Inn" id="registerInput" />
+        <span asp-validation-for="Inn" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth" class="control-label">Дата рождения</label>
+        <br />
+        <input asp-for="DateOfBirth" id="registerInput" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PassportData" class="control-label">Паспортные данные</label>
+        <br />
+        <input asp-for="PassportData" id="registerInput" />
+        <span asp-validation-for="PassportData" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Country" class="control-label">Страна</label>
+        <br />
+        <select id="registerInput" asp-for="Country" asp-items="ViewBag.Country">
+            <option selected="selected" value="@null">@Model.Country</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" class="control-label">Физический Адрес</label>
+        <br />
+        <input asp-for="Address" id="registerInput" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LegalAddress" class="control-label">Юридический Адрес</label>
+        <br />
+        <input asp-for="LegalAddress" id="registerInput" />
+        <span asp-validation-for="LegalAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Position" class="control-label">Должность</label>
+        <br />
+        <input asp-for="Position" id="registerInput" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CompanyId" class="control-label">Компания</label>
+        <br />
+        <select asp-for="CompanyId" id="registerInput" asp-items="ViewBag.CompanyId"></select>
+        <span asp-validation-for="CompanyId" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-default" style="color: #CA0039; border-color:#CA0039; border-radius:0px;">Сохранить</button>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

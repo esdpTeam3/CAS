@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CAStest.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Пользователи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="width:100%; position:absolute; left:0px;">
+    <h2 style="color:#066023; width:70%;" class="bigGreenCaption">Пользователи</h2>
+    <div class="controlPanel">
+        <div class='addingButton'><a title="Добавить пользователя" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить пользователя" class='icon1'></a></div>
+        <div class='tableButton'><a title="Карточками" asp-action="UserCards" asp-controller="User"><img src='~/images/material/cards.png' alt="Карточками" class='icon1'></a></div>
+        <div class='search'>
+            @using (Html.BeginForm())
+            {
+                <p>
+                    @Html.TextBox("SearchString")
+                    <button type="submit" title="Поиск" class="btn-link button-icon"><img src='~/images/material/search.png' alt="Поиск" class='searcherImg icon'></button>
+                </p>
+            }
+        </div>
+    </div>
+
+
+
+
+    <div class='tableBlock ' style="width:95%">
+        <table class='tableUserList'>
+            <tr class='tableUserListTr'>
+                <th class='tableUserListTh'>@Html.ActionLink("Имя пользователя", "UserList", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th class='tableUserListTh'>Логин</th>
+                <th class='tableUserListTh'>Дата смены пароля</th>
+                <th class='tableUserListTh'>Управление</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class='tableUserListTr'>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Fullname)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.DatePassword)
+                    </td>
+                    <td class='tableUserListTd'>
+                        <a asp-action="EditUser" asp-controller="User" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                        <a asp-action="Details" asp-controller="User" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+
+                        @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                        {
+                            if (item.IsBlocked)
+                            {
+                                <form asp-action="unBlock" asp-controller="User" asp-route-id="@item.Id">
+                                    <button  style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Разблокировать"><img src='~/images/material/lock.png' alt="Разблокировать" class='icon3'></button>
+                                </form>
+                                
+                            }
+                            else
+                            {
+                                <form asp-action="Block" asp-controller="User" asp-route-id="@item.Id">
+                                    <button  style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Заблокировать"><img src='~/images/material/unlock.png' alt="Заблокировать" class='icon3'></button>
+                                </form>
+                                
+                            }
+                        }
+
+
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-CAStest-9979E8FC-40C0-4199-9655-8A1EB9496837</UserSecretsId>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Compile Remove="Models\CompanyViewModels\**" />
+    <Content Remove="Migrations\**" />
+    <Content Remove="Models\CompanyViewModels\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="Models\CompanyViewModels\**" />
+    <None Remove="Migrations\**" />
+    <None Remove="Models\CompanyViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20180807102943_Initial.cs" />
+    <Compile Include="Migrations\20180807102943_Initial.Designer.cs" />
+    <Compile Include="Migrations\20180807122509_AddNewFieldsToModels.cs" />
+    <Compile Include="Migrations\20180807122509_AddNewFieldsToModels.Designer.cs" />
+    <Compile Include="Migrations\20180807135841_AddRoles.cs" />
+    <Compile Include="Migrations\20180807135841_AddRoles.Designer.cs" />
+    <Compile Include="Migrations\20180807142057_MakeFieldNullable.cs" />
+    <Compile Include="Migrations\20180807142057_MakeFieldNullable.Designer.cs" />
+    <Compile Include="Migrations\20180807130314_Add2ModelsContactContactType.cs" />
+    <Compile Include="Migrations\20180807130314_Add2ModelsContactContactType.Designer.cs" />
+    <Compile Include="Migrations\20180807142325_AddCheckForNull.cs" />
+    <Compile Include="Migrations\20180807142325_AddCheckForNull.Designer.cs" />
+    <Compile Include="Migrations\20180809143226_InheritIPfromIndividual.cs" />
+    <Compile Include="Migrations\20180809143226_InheritIPfromIndividual.Designer.cs" />
+    <Compile Include="Migrations\20180814142753_AddModelsContractContractPropertiesCategoriesCategoriesPropertyPropertyPropertyType.cs" />
+    <Compile Include="Migrations\20180814142753_AddModelsContractContractPropertiesCategoriesCategoriesPropertyPropertyPropertyType.Designer.cs" />
+    <Compile Include="Migrations\20180816131957_AddFieldCountryByConragents.cs" />
+    <Compile Include="Migrations\20180816131957_AddFieldCountryByConragents.Designer.cs" />
+    <Compile Include="Migrations\20180817144943_AddModelCounterpartyContracts.cs" />
+    <Compile Include="Migrations\20180817144943_AddModelCounterpartyContracts.Designer.cs" />
+    <Compile Include="Migrations\20180825111843_ChangeType.cs" />
+    <Compile Include="Migrations\20180825111843_ChangeType.Designer.cs" />
+    <Compile Include="Migrations\20180827132019_AddLegalAddressAndFieldIsBlocked.cs" />
+    <Compile Include="Migrations\20180827132019_AddLegalAddressAndFieldIsBlocked.Designer.cs" />
+    <Compile Include="Migrations\20180830095704_AddContractCounterpartiesEntity.cs" />
+    <Compile Include="Migrations\20180830095704_AddContractCounterpartiesEntity.Designer.cs" />
+    <Compile Include="Migrations\20180903135645_AddActAndSupplementaryModels.cs" />
+    <Compile Include="Migrations\20180903135645_AddActAndSupplementaryModels.Designer.cs" />
+    <Compile Include="Migrations\20180906152857_AddModelsForPermission.cs" />
+    <Compile Include="Migrations\20180906152857_AddModelsForPermission.Designer.cs" />
+    <Compile Include="Migrations\20180912120559_AddFavoriteEntity.cs" />
+    <Compile Include="Migrations\20180912120559_AddFavoriteEntity.Designer.cs" />
+    <Compile Include="Migrations\20180925122328_ChangeActAndSupplementaryNameToActAndSupplementaryNumber.cs" />
+    <Compile Include="Migrations\20180925122328_ChangeActAndSupplementaryNameToActAndSupplementaryNumber.Designer.cs" />
+    <Compile Include="Migrations\20181001142530_AddFieldCountryByContract.cs" />
+    <Compile Include="Migrations\20181001142530_AddFieldCountryByContract.Designer.cs" />
+    <Compile Include="Migrations\20181004092952_AddFileModels.cs" />
+    <Compile Include="Migrations\20181004092952_AddFileModels.Designer.cs" />
+    <Compile Include="Migrations\20181004140255_FixFileModels.cs" />
+    <Compile Include="Migrations\20181004140255_FixFileModels.Designer.cs" />
+    <Compile Include="Migrations\20181015033045_AddFieldAutoprolongationByContract.cs" />
+    <Compile Include="Migrations\20181015033045_AddFieldAutoprolongationByContract.Designer.cs" />
+    <Compile Include="Migrations\20181016080010_AddFieldPasswordNatificationAndContractNatificationToContract.cs" />
+    <Compile Include="Migrations\20181016080010_AddFieldPasswordNatificationAndContractNatificationToContract.Designer.cs" />
+    <Compile Include="Migrations\20181008082851_AddUserGroup.cs" />
+    <Compile Include="Migrations\20181008082851_AddUserGroup.Designer.cs" />
+    <Compile Include="Migrations\20181009073219_ChangeTypeUserIdToString.cs" />
+    <Compile Include="Migrations\20181009073219_ChangeTypeUserIdToString.Designer.cs" />
+    <Compile Include="Migrations\20181015141552_AddNotificationModel.cs" />
+    <Compile Include="Migrations\20181015141552_AddNotificationModel.Designer.cs" />
+    <Compile Include="Migrations\20181016084955_AddConnectionFromNotificationToUser.cs" />
+    <Compile Include="Migrations\20181016084955_AddConnectionFromNotificationToUser.Designer.cs" />
+    <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Migrations\ApplicationDbContextModelSnapshot.cs.orig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
+</Project>

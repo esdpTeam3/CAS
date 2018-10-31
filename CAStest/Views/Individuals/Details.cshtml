@@ -1,0 +1,103 @@
+﻿@model CAStest.Models.IndividualsViewModel.DetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Физическое лицо</h2>
+
+<div>
+    <h4>Детальная информация о физическом лице</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            ФИО
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Fullname)
+        </dd>
+        <dt>
+            ИНН
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Inn)
+        </dd>
+        <dt>
+            Дата рождения
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.DateOfBirth)
+        </dd>
+        <dt>
+            Паспортные данные
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.PassportData)
+        </dd>
+        <dt>
+            Страна
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Country)
+        </dd>
+        <dt>
+            Физический Адрес
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Address)
+        </dd>
+        <dt>
+            Юридический Адрес
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.LegalAddress)
+        </dd>
+        <dt>
+            Должность
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Position)
+        </dd>
+        <dt>
+            Компания
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Company.CompanyName)
+        </dd>
+    </dl>
+</div>
+
+
+<h4>Контакты <a asp-action="Create" asp-controller="Contact" asp-route-userId="@Model.Individual.Id"><img src='~/images/material/add.png' alt="Добавить контакт" class='icon1'></a> </h4>
+
+<table class='tableUserList'>
+    <tr class='tableUserListTr'>
+        <th class='tableUserListTh'>
+            Название
+        </th>
+        <th class='tableUserListTh'>
+            Контакт
+        </th>
+        <th class='tableUserListTh'>
+            Управление
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Contacts)
+    {
+    <tr class='tableUserListTr'>
+        <td class='tableUserListTd'>
+            @Html.DisplayFor(model => item.ContactType.Name)
+        </td>
+        <td class='tableUserListTd'>
+            @Html.DisplayFor(model => item.Value)
+        </td>
+        <td class='tableUserListTd'>
+            <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+            <a asp-action="Delete" asp-route-id="@item.Id" title="Удалить"><img src='~/images/material/delete.png' alt="Удалить" class='icon3'></a>
+        </td>
+    </tr>
+    }
+</table>
+

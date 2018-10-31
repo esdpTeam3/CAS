@@ -1,0 +1,234 @@
+﻿@model CAStest.Models.ContractViewModel.DetailsContractViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Договор</h2>
+
+
+
+<div>
+    <h4>Детальная информация</h4>
+    <hr />
+
+    <div id="act" class="modal_div">
+        <!-- скрытый див с уникaльным id = modal1 -->
+        <span class="modal_close">X</span>
+        <h1>Акты</h1>
+        @foreach (var act in Model.Contract.Acts)
+        {
+            <div class="actElement">
+                <label>Номер акта:</label>
+                <p>@act.ActNumber</p>
+                @foreach (var file in act.ActFiles)
+                {
+                    <a asp-action="GetFileStream" asp-controller="Agreement" asp-route-file="@file.Location">@file.Name</a>
+                }
+            </div>
+        }
+    </div>
+    <a href="#act" class="open_modal"><button class="btn btn-default">Акты</button></a><!-- ссылкa с href="#modal1", oткрoет oкнo с  id = modal1-->
+
+    <div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+    <div id="supplementary" class="modal_div">
+        <!-- скрытый див с уникaльным id = modal1 -->
+        <span class="modal_close">X</span>
+        <h1>Доп.Соглашения</h1>
+        @foreach (var supp in Model.Contract.Supplementaries)
+        {
+            <div class="actElement">
+                <label>Номер доп.соглашения:</label>
+                <p>@supp.SupplementaryNumber</p>
+                @foreach (var file in supp.SupplementaryFiles)
+                {
+                    <a asp-action="GetFileStream" asp-controller="Agreement" asp-route-file="@file.Location">@file.Name</a>
+                }
+            </div>
+        }
+    </div>
+    <a href="#supplementary" class="open_modal btn btn-secondary"><button class="btn btn-default">Доп. Соглашения</button></a><!-- ссылкa с href="#modal1", oткрoет oкнo с  id = modal1-->
+    <div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            Номер контракта
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ContractNumber)
+        </dd>
+        <dt>
+            Дата заключения
+        </dt>
+        <dd>
+            @Model.Contract.DateOfOffer.ToShortDateString()
+        </dd>
+        <dt>
+            Дата истечения
+        </dt>
+        <dd class="endDate">
+
+            @Model.Contract.ContractTime.ToShortDateString()
+        </dd>
+        <dt>
+            Страна
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Country)
+        </dd>
+        <dt>
+            Сторона(ы) договора
+        </dt>
+        <dd>
+            <div id="counterpaty">
+                @foreach (var a in Model.Counterparties)
+                {
+                    string str;
+                    if (a is Individual i)
+                    {
+                        str = i.Fullname;
+                    }
+                    else if (a is IndividualEntrepreneur ip)
+                    {
+                        str = ip.Fullname;
+                    }
+                    else if (a is Company c)
+                    {
+                        str = c.CompanyName;
+                    }
+                    else
+                    {
+                        str = null;
+                    }
+                    <p>@str</p>
+                }
+            </div>
+        </dd>
+        @foreach (var item in Model.Contract.ContractProperties)
+        {
+            <dt>
+                @item.Property.Name
+            </dt>
+            <dd>
+                @item.Value
+            </dd>
+        }
+        @if (Model.Contract.ContractFiles != null)
+        {
+            <dt>Файлы</dt>
+            foreach (var file in Model.Contract.ContractFiles)
+            {
+            <dd>
+                <a asp-action="GetFileStream" asp-controller="Agreement" asp-route-file="@file.Location">@file.Name</a>
+            </dd>
+            }
+
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Contract.Id">Изменить</a> |
+    <a asp-action="Index">Вернуться к списку</a>
+
+</div>
+
+
+<div id="prolongation" class="modal_div">
+    <!-- скрытый див с уникaльным id = modal1 -->
+    <span class="modal_close">X</span>
+    <div class="col-md-12 and col-lg-12" id="alternate" style="text-align: center">
+        <strong>*Для продления договора необходимо создать доп.соглашение.</strong>
+    </div>
+    <h1>Доп.Соглашение</h1>
+    <form method="post" enctype="multipart/form-data" class="formProl">
+        <input type="date" name="prolDate" class="prolDate" />
+        <input type="text" name="prolNumber" class="prolNumber" value="" />
+        <div class="prolFilesForm">
+        </div>
+        <input type="button" name="button" value="Добавить файл" id="btn-prolFile" class="btn btn-default" />
+        <input type="button" class="saveProl btn btn-default" value="Save" />
+    </form>
+</div>
+<a href="#prolongation" class="open_modal btn btn-secondary"><button class="btn btn-default">Продлить договор</button></a><!-- ссылкa с href="#modal1", oткрoет oкнo с  id = modal1-->
+<div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+
+
+@section Scripts {
+    <script src="~/js/jquery-dateformat.js"></script>
+    <script>
+        $(document).ready(function () {
+            var overlay = $('#overlay');
+            var open_modal = $('.open_modal');
+            var close = $('.modal_close, #overlay');
+            var modal = $('.modal_div');
+
+            open_modal.click(function (event) {
+                event.preventDefault();
+                var div = $(this).attr('href');
+                overlay.fadeIn(400,
+                    function () {
+                        $(div)
+                            .css('display', 'block')
+                            .animate({ opacity: 1, top: '50%' }, 200);
+                    });
+            });
+
+            close.click(function () {
+                modal.animate({ opacity: 0, top: '45%' }, 200,
+                    function () {
+                        $(this).css('display', 'none');
+                        overlay.fadeOut(400);
+                    }
+                );
+            });
+        });
+
+    $(document).on('click', '.saveProl', function () {
+        var prolDate = $(this).parent('.formProl').children('.prolDate').val();
+        var prolNumber = $(this).parent('.formProl').children('.prolNumber').val();
+        console.log(prolDate)
+        console.log(prolNumber)
+        var contractId = @Model.Contract.Id;
+
+        var fileUpload = $('.prolFile');
+        if (fileUpload != null) {
+            var value = new FormData();
+            for (var j = 0; j < fileUpload.length; j++) {
+                var file = fileUpload[j].files;
+                for (var i = 0; i < file.length; i++) {
+                    value.append(file[i].name, file[i]);
+                }
+            /*var file = fileUpload.files;
+            var value = new FormData();
+            for (var i = 0; i < file.length; i++) {
+                value.append(file[i].name, file[i]);*/
+            }
+        }
+        
+        //?prolDate=' + prolDate + '/ ? prolNumber = ' + prolNumber + ' /?contractId = ' + contractId,
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Prolongate", "Agreement")' + '?prolDate=' + prolDate + '&prolNumber=' + prolNumber + '&contractId=' + contractId,
+            contentType: false,
+            processData: false,
+            data: value,
+            success: function (data) {
+                if (data.success) {
+                    $('.endDate').text($.format.date(new Date(prolDate), 'dd/MM/yyyy'))
+                    
+                    alert('Дата окончания договора продлена');
+                } else {
+                    alert('Ошибка продления договора');
+                }
+            }
+        })
+     });
+
+    $(document).on('click', '#btn-prolFile', function () {
+        var file = '<input type="file" name="prolFile" class="form-control prolFile" />'
+        $(this).prev('.prolFilesForm').append(file)
+    });
+    </script>
+}

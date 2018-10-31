@@ -1,0 +1,33 @@
+﻿@model CAStest.Models.Contact
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href='javascript:history.go(-1)' title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Контракт</h2>
+
+<div>
+    <h4>Детальная информация</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Контакт
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+        <dt>
+            Тип контакта
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactType.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a> |
+    <a asp-action="Index">Вернуться к списку</a>
+</div>

@@ -1,0 +1,178 @@
+﻿@using CAStest.Data
+@using Microsoft.EntityFrameworkCore
+@model IEnumerable<CAStest.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#066023">Договора</h2>
+
+<div class="controlPanel">
+    <div class='addingButton'><a title="Добавить договор" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить договор" class='icon1'></a></div>
+    <div class='search'>
+        @*@using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("SearchString")
+                <button type="submit" title="Поиск" class="btn-link button-icon"><img src='~/images/material/search.png' alt="Поиск" class='searcherImg icon'></button>
+            </p>
+        }*@
+    </div>
+</div>
+
+<div class='tableBlock ' style="width:95%">
+    <table class='tableUserList' id="myTable">
+        <thead>
+            <tr class='tableUserListTr'>
+
+                <th class='tableUserListTh'>
+
+                </th>
+                <th class='tableUserListTh'>
+                    Код договора
+                </th>
+                <th class='tableUserListTh'>
+                    Дата заключения
+                </th>
+                <th class='tableUserListTh'>
+                    @Html.ActionLink("Срок действия", "Index", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th class='tableUserListTh'>
+                    Управление
+                </th>
+                <th class='tableUserListTh'>
+                    Действия
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            int index = 0;
+            foreach (var item in Model)
+            {
+                <tr>
+
+                    @if (item.ContractTime.AddDays(1) < DateTime.Now)
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/red_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+                    else if (item.ContractTime.AddDays(1) > DateTime.Now && item.ContractTime < DateTime.Now.AddDays(3))
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/yellow_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+                    else
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/green_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.ContractNumber)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.DateOfOffer)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.ContractTime)
+                    </td>
+                    <td class='tableUserListTd'>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+                    </td>
+                    <td class='tableUserListTd'>
+                        @if (!ViewBag.Fav.Contains(item))
+                        {
+                            <button asp-action="Open" asp-controller="Agreement" id="addToFavorites" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Добавить в Избранное" onclick="addToFavorites('@item.Id')"><img src='~/images/material/favorite-empty.png' alt="Добавить в Избранное" class='icon3'></button>
+                        }
+                        @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                        {
+                            if (item.IsBlocked)
+                            {
+                                <form asp-action="Open" asp-controller="Agreement" asp-route-id="@item.Id">
+                                    <button style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Открыть"><img src='~/images/material/lock.png' alt="Открыть" class='icon3'></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Close" asp-controller="Agreement" asp-route-id="@item.Id">
+                                    <button style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Закрыть"><img src='~/images/material/unlock.png' alt="Закрыть" class='icon3'></button>
+                                </form>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+            </tbody>
+    </table>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            var isInFav = '@ViewBag.IsInFavorites';
+            if (isInFav == true) {
+                $('#addToFavorites').hide();
+            }
+        });
+
+
+        function addToFavorites(id) {
+            $.ajax({
+                url: '@Url.Action("AddToFavorites", "Agreement")',
+                type: 'POST',
+                data: { 'id': id },
+                success: function(data) {
+                    addReply(data, themeId) 
+                }
+            });
+        }
+        $(document).on('click', '#addToFavorites', function () {
+            $(this).hide();
+        });
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                language: {
+                    "processing": "Подождите...",
+                    "search": "Поиск:",
+                    "lengthMenu": "Показать _MENU_ записей",
+                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                    "infoPostFix": "",
+                    "loadingRecords": "Загрузка записей...",
+                    "zeroRecords": "Записи отсутствуют.",
+                    "emptyTable": "В таблице отсутствуют данные",
+                    "paginate": {
+                        "first": "Первая",
+                        "previous": "Предыдущая",
+                        "next": "Следующая",
+                        "last": "Последняя"
+                    }
+                },
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "все"]],
+                "columns": [
+                    { "orderable": false },
+                    null,
+                    null,
+                    null,
+                    { "orderable": false },
+                    { "orderable": false }
+                ]
+            });
+                });
+                
+                
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CAStest.Models.Property>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Расширяемые поля</h2>
+
+<p>
+    <div class='addingButton'><a title="Добавить договор" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить договор" class='icon1'></a></div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Название</label>
+            </th>
+            <th>
+                <label>Тип поля</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyType.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

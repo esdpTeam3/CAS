@@ -1,0 +1,195 @@
+﻿@using CAStest.Data
+@using Microsoft.EntityFrameworkCore
+@model IEnumerable<CAStest.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#066023">Избранные договора</h2>
+<div class="controlPanel">
+    <div class='search'>
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("SearchString")
+                <button type="submit" title="Поиск" class="btn-link button-icon"><img src='~/images/material/search.png' alt="Поиск" class='searcherImg icon'></button>
+            </p>
+        }
+    </div>
+</div>
+
+<div class='tableBlock ' style="width:95%">
+    <table class='tableUserList'>
+        <tr class='tableUserListTr'>
+            <th class='tableUserListTh'>
+
+            </th>
+            <th class='tableUserListTh'>
+                Номер контракта
+            </th>
+            <th class='tableUserListTh'>
+                Дата заключения
+            </th>
+            <th class='tableUserListTh'>
+                @Html.ActionLink("Время действия", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th class='tableUserListTh'>
+                Управление
+            </th>
+            <th class='tableUserListTh'>
+                Действия
+            </th>
+        </tr>
+        @{
+            int index = 0;
+            foreach (var item in Model)
+            {
+                <tr class='tableUserListTr'>
+                    @if (item.ContractTime.AddDays(1) < DateTime.Now)
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/red_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+                    else if (item.ContractTime.AddDays(1) > DateTime.Now && item.ContractTime < DateTime.Now.AddDays(3))
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/yellow_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+                    else
+                    {
+                        <td class='tableUserListTd'>
+                            <img src='~/images/material/green_marker.png' alt="Скоро истек" class='icon3' />
+                        </td>
+                    }
+
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.ContractNumber)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.DateOfOffer)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.ContractTime)
+                    </td>
+                    <td class='tableUserListTd'>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+                    </td>
+                    <td class='tableUserListTd'>
+                        <button asp-action="Open" asp-controller="Agreement" asp-route-id="@item.Id" id="removeFromFavorites" onclick="removeFromFavorites('@item.Id', '@index')" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Удалить из избранного"><img src='~/images/material/clear.png' alt="Удалить из избранного" class='icon3'></button>
+                        @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                        {
+                            if (item.IsBlocked)
+                            {
+                                <button asp-action="Open" asp-controller="Agreement" asp-route-id="@item.Id" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Открыть"><img src='~/images/material/lock.png' alt="Открыть" class='icon3'></button>
+                            }
+                            else
+                            {
+                                <button asp-action="Close" asp-controller="Agreement" asp-route-id="@item.Id" style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Закрыть"><img src='~/images/material/unlock.png' alt="Закрыть" class='icon3'></button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ИНН
+                </th>
+                <th>
+                    Дата заключения
+                </th>
+                <th>
+                    @Html.ActionLink("Время действия", "Index", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 0;
+                foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfOffer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractTime)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a>
+                            <input type="button" id="removeFromFavorites" value="Удалить из Избранного" onclick="removeFromFavorites('@item.Id', '@index')" />
+                            @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                            {
+                                if (item.IsBlocked)
+                                {
+                                    <form asp-action="Open" asp-controller="Agreement" asp-route-id="@item.Id">
+                                        <input type="submit" value="Открыть" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="Close" asp-controller="Agreement" asp-route-id="@item.Id">
+                                        <input type="submit" value="Закрыть" />
+                                    </form>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>*@
+
+
+
+
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function() {
+            var isInFav = '@ViewBag.IsInFavorites';
+            if (isInFav == true) {
+                $('#removeFromFavorites').show();
+            }
+        });
+
+        function removeFromFavorites(id, index) {
+            $.ajax({
+                url: '@Url.Action("RemoveFromFavorites", "Agreement")',
+                type: 'POST',
+                data: { 'id': id },
+                success: function(data) {
+                    if (!data.success) {
+                        alert('Контракт успешно удален из Избранного');
+
+                    } else {
+                        alert('Ошибка при удалении из Избранного');
+                    }
+                }
+            });
+        }
+        $(document).on('click', '#removeFromFavorites', function() {
+            $(this).parent().parent().hide();
+        });
+
+    </script>
+}

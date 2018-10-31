@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Личный кабинет";
+}
+<h2>Личный кабинет</h2>
+<hr />
+<<<<<<< HEAD
+<div class="container-fluid">
+    <div class="left-content">
+        <ul class="nav nav-tabs nav-stacked nav-pills">
+            <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Пользователи</li>
+            <li><a asp-action="UserList" asp-controller="User"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список пользователей</a></li>
+            <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Контагенты</li>
+            <li><a asp-action="Index" asp-controller="Individuals"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Физ. Лиц</a></li>
+            <li><a asp-action="Index" asp-controller="IndividualEntrepreneur"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список ИП</a></li>
+            <li><a asp-action="Index" asp-controller="Company"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Компаний</a></li>
+            <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Договора</li>
+            <li><a asp-action="ChangePassword"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Договоров</a></li>
+        </ul>
+    </div>
+    <div class="right-block">
+        <p>Выберите интересующий раздел</p>
+    </div>
+=======
+<div class="col-xs-12 col-md-4">
+    <ul class="nav nav-tabs nav-stacked nav-pills">
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Пользователи</li>
+        <li><a asp-action="UserList" asp-controller="User"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список пользователей</a></li>
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Контагенты</li>
+        <li><a asp-action="Index" asp-controller="Individuals"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Физ. Лиц</a></li>
+        <li><a asp-action="Index" asp-controller="IndividualEntrepreneur"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список ИП</a></li>
+        <li><a asp-action="Index" asp-controller="Company"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Компаний</a></li>
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Контакты</li>
+        <li><a asp-action="Index" asp-controller="ContactTypes"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Типы контактов</a></li>
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> Договора</li>
+        <li><a asp-action="ChangePassword"><span class="glyphicon glyphicon-glyphicon glyphicon-list"></span> Список Договоров</a></li>
+    </ul>
+>>>>>>> ddacff0d49611c96259a06a71ace47563966d42d
+</div>
+

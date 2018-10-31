@@ -1,0 +1,65 @@
+﻿<div class="col-md-3 col-sm-5 col-xs-12">
+    <ul class="nav nav-tabs nav-stacked nav-pills">
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Пользователи</b> </li>
+<<<<<<< HEAD
+        <li class="nav-left-panel"><a asp-action="UserList" asp-controller="User" class="btn-inside-text"><span>Список пользователей</span></a></li>
+=======
+        <li class="nav-left-panel"><a asp-action="UserList" asp-controller="User" class="btn-inside-text"><span></span> Список пользователей</a></li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Notification" class="btn-inside-text"><span></span> Уведомления</a></li>
+>>>>>>> 4e672abaa43bf6bf1bacf892dea8aa033abc406b
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Контагенты</b> </li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Individuals" class="btn-inside-text"><span class=""></span> Список Физ. Лиц</a></li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="IndividualEntrepreneur" class="btn-inside-text"><span class=""></span> Список ИП</a></li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Company" class="btn-inside-text"><span class=""></span> Список Компаний</a></li>
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Контакты</b> </li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="ContactTypes" class="btn-inside-text"><span class=""></span> Типы контактов</a></li>
+        <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Договора</b> </li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Agreement" class="btn-inside-text"><span class=""></span> Список Договоров</a></li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Groups" class="btn-inside-text"><span class=""></span>Группа пользователей</a></li>
+        <li class="nav-left-panel"><a asp-action="Index" asp-controller="Groups" class="btn-inside-text"><span class=""></span>Группа договоров</a></li>
+        <li class="nav-left-panel"><a asp-action="Favorites" asp-controller="Agreement" class="btn-inside-text"><span class=""></span> Избранные</a></li>
+    </ul>
+</div>
+
+@*<div class="col-md-3 col-sm-5 col-xs-12 ">
+    <nav class="navmenu navmenu-default navmenu-fixed-left" role="navigation">
+        <ul class="nav nav-tabs nav-stacked nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle"   data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-glyphicon glyphicon-menu-down nav-user-text"><b>Пользователи</b></span>
+                </a>
+                <ul class="dropdown-menu nav nav-tabs nav-stacked nav-pills">
+                    <li>
+                        <a asp-action="UserList" asp-controller="User" class="nav-user-link" width="200px">Список пользователей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-header dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-glyphicon glyphicon-menu-down nav-user-text"><b>Контрагенты</b></span>
+                </a>
+                <ul class="dropdown-menu nav nav-tabs nav-stacked nav-pills">
+                    <li class="nav-left-panel"><a asp-action="Index" asp-controller="Individuals" class="btn-inside-text nav-user-link" style="width:131%"><span class=""></span> Список Физ. Лиц</a></li>
+                    <li class="nav-left-panel"><a asp-action="Index" asp-controller="IndividualEntrepreneur" class="btn-inside-text nav-user-link" style="width:131%"><span class=""></span> Список ИП</a></li>
+                    <li class="nav-left-panel"><a asp-action="Index" asp-controller="Company" class="btn-inside-text nav-user-link" style="width:131%"><span class=""></span> Список Компаний</a></li>
+                </ul>
+            </li>
+            <li class="nav-header dropdown">
+                <a class="dropdown-toggle style="width:80px"" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-glyphicon glyphicon-menu-down nav-user-text"><b>Контакты</b></span>
+                </a>
+                <ul class="dropdown-menu nav nav-tabs nav-stacked nav-pills">
+                    <li class="nav-left-panel"><a asp-action="Index" asp-controller="ContactTypes" class="btn-inside-text nav-user-link" style="width:131%"><span class=""></span> Типы контактов</a></li>
+                </ul>
+            </li>
+            <li class="nav-header dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-glyphicon glyphicon-menu-down nav-user-text"><b>Договора</b></span>
+                </a>
+                <ul class="dropdown-menu nav nav-tabs nav-stacked nav-pills">
+                    <li class="nav-left-panel"><a asp-action="Index" asp-controller="Agreement" class="btn-inside-text nav-user-link" style="width:131%"><span class=""></span> Список Договоров</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>*@

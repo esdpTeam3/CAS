@@ -1,0 +1,31 @@
+﻿
+<div class="row">
+    <div class="col-md-2 col-sm-5 col-xs-12">
+        <div class='navigbar'>
+            @if(User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+            {
+                <ul class='navigbarList navigbarUsers'>
+                    <li class='navigbarCaption'><span class="navigbarCaptionText">Пользователи</span></li>
+                    <li><a class='navigbarItem' asp-action="UserList" asp-controller="User"><img src='~/images/material/account.png' class='icon'>Список пользователей</a></li>
+                </ul>
+                <ul class='navigbarList navigbarCP'>
+                    <li class='navigbarCaption'><span class="navigbarCaptionText">Контрагенты</span></li>
+                    <li><a class='navigbarItem' asp-action="Index" asp-controller="Individuals"><img src='~/images/material/individual.png' class='icon'>Физические лица</a></li>
+                    <li><a class='navigbarItem' asp-action="Index" asp-controller="IndividualEntrepreneur"><img src='~/images/material/indent.png' class='icon'>ИП</a></li>
+                    <li><a class='navigbarItem' asp-action="Index" asp-controller="Company"><img src='~/images/material/company.png' class='icon'>Компании</a></li>
+                </ul>
+                <ul class='navigbarList navigbarContacts'>
+                    <li class='navigbarCaption'><span class="navigbarCaptionText">Контакты</span></li>
+                    <li><a class='navigbarItem' asp-action="Index" asp-controller="ContactTypes"><img src='~/images/material/contact.png' class='icon'>Типы контактов</a></li>
+                </ul>
+            }
+            <ul class='navigbarList navigbarContracts'>
+                <li class='navigbarCaption'><span class="navigbarCaptionText">Договора</span></li>
+                <li><a class='navigbarItem' asp-action="Index" asp-controller="Agreement"><img src='~/images/material/contract.png' class='icon'>Список договоров</a></li>
+                @*<li><a class='navigbarItem' asp-action="Index" asp-controller="PermissionsGroups"><img src='~/images/material/lock.png' class='icon'>Доступ</a></li>*@
+                <li><a class='navigbarItem' asp-action="Favorites" asp-controller="Agreement"><img src='~/images/material/favorite-empty.png' class='icon'>Избранные</a></li>
+                <li><a class='navigbarItem' asp-action="Index" asp-controller="Properties"><img src='~/images/material/fields.png' class='icon'>Расширяемые поля</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

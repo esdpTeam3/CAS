@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CAStest.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#066023">Контакты</h2>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-sm-7 col-xs-12">
+            <p>
+                <div class='addingButton'><a title="Добавить договор" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить договор" class='icon1'></a></div>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Контакт
+                        </th>
+                        <th>
+                            Тип контакта
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactType.Id)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> @*|
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<CAStest.Models.IndividualEntrepreneur>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="color:#066023">Индивидуальные предпрениматели</h2>
+<hr/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-5 col-xs-12">
+            <ul class="nav nav-tabs nav-stacked nav-pills">
+                <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Пользователи</b> </li>
+                <li class="nav-left-panel"><a asp-action="UserList" asp-controller="User" class="btn-inside-text"><span></span> Список пользователей</a></li>
+                <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Контагенты</b> </li>
+                <li class="nav-left-panel"><a asp-action="Index" asp-controller="Individuals" class="btn-inside-text"><span class=""></span> Список Физ. Лиц</a></li>
+                <li class="nav-left-panel"><a asp-action="Index" asp-controller="IndividualEntrepreneur" class="btn-inside-text"><span class=""></span> Список ИП</a></li>
+                <li class="nav-left-panel"><a asp-action="Index" asp-controller="Company" class="btn-inside-text"><span class=""></span> Список Компаний</a></li>
+                <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Контакты</b> </li>
+                <li class="nav-left-panel"><a asp-action="Index" asp-controller="ContactTypes" class="btn-inside-text"><span class=""></span> Типы контактов</a></li>
+                <li class="nav-header"><span class="glyphicon glyphicon-glyphicon glyphicon-menu-down"></span> <b>Договора</b> </li>
+                <li class="nav-left-panel"><a asp-action="ChangePassword" class="btn-inside-text"><span class=""></span> Список Договоров</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 col-sm-7 col-xs-12">
+            <p>
+                <a asp-action="Create">Создание</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Полное имя
+                        </th>
+                        <th>
+                            ИНН
+                        </th>
+                        <th>
+                            Дата
+                        </th>
+                        <th>
+                            Паспортные данные
+                        </th>
+                        <th>
+                            Адрес
+                        </th>
+<<<<<<< HEAD
+=======
+                        <th>
+                            Должность
+                        </th>
+                        <th>
+                            Компания
+                        </th>
+>>>>>>> 376730e4e03ccf369352fc410faa5fb87808f34a
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fullname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Inn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PassportData)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+<<<<<<< HEAD
+=======
+                                @Html.DisplayFor(modelItem => item.Position)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+>>>>>>> 376730e4e03ccf369352fc410faa5fb87808f34a
+                                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> @*|
+                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

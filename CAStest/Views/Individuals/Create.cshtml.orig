@@ -1,0 +1,90 @@
+﻿@model CAStest.Models.IndividualsViewModel.CreateIndividualViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="Index" asp-controller="Individuals" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Физическое лицо</h2>
+
+<h4>Добавление физического лица</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fullname" class="control-label">Полное имя</label>
+                <br />
+                <input asp-for="Fullname" id="registerInput" />
+                <span asp-validation-for="Fullname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inn" class="control-label">ИНН</label>
+                <br />
+                <input asp-for="Inn" id="registerInput" />
+                <span asp-validation-for="Inn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label">Дата рождения</label>
+                <br />
+                <input asp-for="DateOfBirth" id="registerInput" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassportData" class="control-label">Паспортные данные</label>
+                <br />
+                <input asp-for="PassportData" id="registerInput" />
+                <span asp-validation-for="PassportData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<<<<<<< HEAD
+                <label asp-for="Countries" class="control-label">Страна</label>
+                <br />
+=======
+                <label asp-for="Countries" class="control-label selectCountry">Страна</label>
+>>>>>>> 0506c057fbfc31680a8389af759228d97746db82
+                <select id="registerInput" asp-for="Country" asp-items="@Model.Countries">
+                    <option selected="selected" value="@null">Выбрать страну</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Физичечкий Адрес</label>
+                <br />
+                <input asp-for="Address" id="registerInput" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LegalAddress" class="control-label">Юридический Адрес</label>
+                <br />
+                <input asp-for="LegalAddress" id="registerInput" />
+                <span asp-validation-for="LegalAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Position" class="control-label">Должность</label>
+                <br />
+                <input asp-for="Position" id="registerInput" />
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Companies" class="control-label">Компания</label>
+                <br />
+                @*@Html.DropDownListFor("CompanyId", Model.Companies, "Select one")*@
+                <select id="registerInput" asp-for="CompanyId" asp-items="@Model.Companies">
+                    <option selected="selected" value="@null">Нет</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039 " />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

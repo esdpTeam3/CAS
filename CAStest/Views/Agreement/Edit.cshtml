@@ -1,0 +1,213 @@
+﻿@model CAStest.Models.ContractViewModel.EditContractViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a asp-action="Index" asp-controller="Agreement" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Договор</h2>
+
+<h4>Изменение договора</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Contract.Id" />
+            <div class="form-group">
+                <label asp-for="Contract.ContractNumber" class="control-label">Номер договора</label>
+                <input asp-for="Contract.ContractNumber" id="registerInput" />
+                <span asp-validation-for="Contract.ContractNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.DateOfOffer" class="control-label">Дата заключения</label>
+                <input asp-for="Contract.DateOfOffer" id="registerInput" />
+                <span asp-validation-for="Contract.DateOfOffer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.ContractTime" class="control-label">Время действия</label>
+                <input asp-for="Contract.ContractTime" id="registerInput" />
+                <span asp-validation-for="Contract.ContractTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.Country" class="control-label">Страна</label>
+                <select id="registerInput" asp-for="Contract.Country" asp-items="ViewBag.Country">
+                    <option selected="selected" value="@null">@Model.Contract.Country</option>
+                </select>
+            </div>
+            <div id="counterpaty">
+                <label asp-for="Counterparties" class="control-label">Сторона(ы) договора</label>
+
+                @foreach (var a in Model.Counterparties)
+                {
+                    string str; int b;
+                    if (a is Individual i)
+                    {
+                        str = i.Fullname;
+                        b = i.Id;
+                    }
+                    else if (a is IndividualEntrepreneur ip)
+                    {
+                        str = ip.Fullname;
+                        b = ip.Id;
+                    }
+                    else if (a is Company c)
+                    {
+                        str = c.CompanyName;
+                        b = c.Id;
+                    }
+                    else
+                    {
+                        str = null;
+                        b = 0;
+                    }
+                    <div id="counterpatyValue">
+                        <p></p>
+                        <input type="text" id="counterPatyName" value="@str" class="form-control" disabled>
+                        <p></p>
+                        <input type="hidden" id="counterPatyId" value="@b" name="CounterpartiesId" class="form-control" />
+                        <div class="btn-group btn-group-sm">
+                            <p></p>
+                            <a><input type="button" name="button" id="@b-@Model.Contract.Id" value="х" class="btn btn-default btn-delete" /></a>
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.Counterparties == null)
+            {
+                <div id="counterpaty">
+                    <div id="counterpatyValue">
+                        <input type="text" id="counterPatyName" class="form-control" disabled>
+                        <p></p>
+                        <input type="hidden" id="counterPatyId" name="CounterpartiesId" class="form-control" />
+                        <div class="btn-group btn-group-sm">
+                            <p></p>
+                            <input type="button" name="button" value="х" id="btn-delete" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+            <div class="dropdown container">
+                <div class="list btn-group dropright d-flex justify-content-start" id="id">
+                    <p class="divider"></p>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039">
+                        Выбрать контрагента
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Физ. Лицо<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.Individuals)
+                                {
+                                    <li>
+                                        <a data-name="@i.Fullname" , data-id="@i.Id" id="add">@i.Fullname</a>
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu dropdown-menu-right">
+                            <a class="test" tabindex="-1" href="#">ИП<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.IndividualEntrepreneurs)
+                                {
+                                    <li>
+                                        <a data-name="@i.Fullname" , data-id="@i.Id" id="add">@i.Fullname</a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Компания<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.Companies)
+                                {
+                                    <li>
+                                        <a data-name="@i.CompanyName" , data-id="@i.Id" id="add">@i.CompanyName</a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p></p>
+                <label asp-for="Contract.Autorolongation" class="control-label">Автопролонгация</label>
+                <input asp-for="Contract.Autorolongation" class="form-control" type="checkbox" />
+                <p></p>
+            </div>
+
+            <div class="form-group">
+                <p></p>
+                <input type="submit" value="Сохранить" class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+    $('#btn-contact').click(function () {
+        $('.dinamic').append($('.field:first').clone());
+    });
+
+    $('#btn-counterparty').click(function () {
+        $('.dropdown').append($('.list:first').clone().attr('id', 'new_id'));
+        $("#btn-delete").show();
+    });
+
+    $(document).ready(function () {
+        $(document).on("click", "a.test", function (e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+
+    $(document).on('click', '.btn-delete', function () {
+        var _counterpartyId = $(this).attr('id');
+        var result = _counterpartyId.split("-");
+        console.log(_counterpartyId);
+
+        var messege = 'Операция прошла успешно';
+          $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteCounterparty", "Agreement")',
+              data: { '_counterpartyId': result[0], '_contractId': result[1]},
+              success: function (message) {
+                    console.log(message);
+                },
+                error: function() {
+                    alert("Не удалось выполнить команду");
+                }
+        });
+
+        $(this).parent().parent().parent().remove();
+    });
+
+    $(document).on('click', '#add', function () {
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+        $('#counterpaty').append($('#counterpatyValue:first').clone());
+        document.getElementById('counterPatyName').value = name;
+        document.getElementById('counterPatyId').value = id;
+        $('#counterpatyValue').show();
+        $('#btn-delete').show();
+    });
+
+    </script>
+}
+

@@ -1,0 +1,357 @@
+﻿@model CAStest.Models.AgrementViewModel.CreateContractViewModel
+
+@{
+    ViewData["Title"] = "Создание договора";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a asp-action="Index" asp-controller="Agreement" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+
+<h2>Договор</h2>
+
+<h4>Добавление нового договора</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+            <div id="act" class="modal_div">
+                <!-- скрытый див с уникaльным id = modal1 -->
+                <span class="modal_close">X</span>
+                <h1>Акты</h1>
+                <div class="actForm"></div>
+                <input type="button" name="button" value="+" id="btn-act" />
+            </div>
+            <a href="#act" class="open_modal"><button class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039">Акты</button></a><!-- ссылкa с href="#modal1", oткрoет oкнo с  id = modal1-->
+
+            <div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+            <div id="supplementary" class="modal_div">
+                <!-- скрытый див с уникaльным id = modal1 -->
+                <span class="modal_close">X</span>
+                <h1>Доп.Соглашения</h1>
+                <div class="suppForm"></div>
+                <input type="button" name="button" value="+" id="btn-supp" class="btn btn-default" style="position:relative; top:25px" />
+            </div>
+            <a href="#supplementary" class="open_modal btn btn-secondary"><button class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039">Доп. Соглашения</button></a><!-- ссылкa с href="#modal1", oткрoет oкнo с  id = modal1-->
+            <div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ContractNumber" class="control-label">Номер договора</label>
+                <input asp-for="ContractNumber" id="registerInput" />
+                <span asp-validation-for="ContractNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfOffer" class="control-label">Дата заключения</label>
+                <input asp-for="DateOfOffer" id="registerInput" value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day" />
+                <span asp-validation-for="DateOfOffer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractTime" class="control-label">Дата окончания</label>
+                <input asp-for="ContractTime" id="registerInput" value="@DateTime.Now.Year-12-31" />
+                <span asp-validation-for="ContractTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Countries" class="control-label">Страна</label>
+                <select id="registerInput" asp-for="Country" asp-items="@Model.Countries">
+                    <option selected="selected" value="@null">Выбрать страну</option>
+                </select>
+            </div>
+            <p class="divider"></p>
+            <div class="form-group dinamic">
+            </div>
+            <input type="button" name="button" value="Добавить поле" id="btn-contact" class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039" />
+            <p class="divider"></p>
+            <div id="counterpaty">
+                <label asp-for="DateOfOffer" class="control-label">Сторона(ы) договора</label>
+                <div id="counterpatyValue">
+                    <input type="text" id="counterPatyName" class="form-control" disabled>
+                    <p></p>
+                    <input type="hidden" id="counterPatyId" name="CounterpartiesId" class="form-control" />
+                    <div class="btn-group btn-group-sm">
+                        <p></p>
+                        <input type="button" name="button" value="х" id="btn-delete" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown container">
+                <div class="list btn-group dropright d-flex justify-content-start" id="id">
+                    <p class="divider"></p>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039">
+                        Выбрать контрагента
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Физ. Лицо<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.Individuals)
+                                {
+                                    <li>
+                                        <a data-name="@i.Fullname" , data-id="@i.Id" id="add">@i.Fullname</a>
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu dropdown-menu-right">
+                            <a class="test" tabindex="-1" href="#">ИП<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.IndividualEntrepreneurs)
+                                {
+                                    <li>
+                                        <a data-name="@i.Fullname" , data-id="@i.Id" id="add">@i.Fullname</a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Компания<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var i in Model.Companies)
+                                {
+                                    <li>
+                                        <a data-name="@i.CompanyName" , data-id="@i.Id" id="add">@i.CompanyName</a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p></p>
+                <label asp-for="CheckAutorolongation" class="control-label">Автопролонгация</label>
+                <input asp-for="CheckAutorolongation" class="form-control" type="checkbox" />
+                <p></p>
+            </div>
+
+<<<<<<< HEAD
+=======
+            <div>
+                <div class="contractFilesForm">
+                    <input type="file" name="contractFiles" class="contractFile" value="" />
+                </div>
+                <input type="button" name="btn" value="Добавить файл" class="btn btn-secondary" id="btn-contractFile"/>
+            </div>
+>>>>>>> 42ff9bf38237839afb1153cb9356f1542e07c72a
+
+
+            <p class="divider"></p>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="actFileElement" style="display: none">
+    <input type="file" name="" class="actFile" />
+    <input type="hidden" value="" name="" class="numberForFile" />
+</div>
+<div class="actElement" style="display: none">
+    <label>Номер Акта:</label>
+    <input type="text" name="actNumbers" class="actNumber" value="" />
+    <div class="actFilesForm">
+    </div>
+    <input type="button" name="button" value="Добавить файл" id="btn-actFile" class="btn btn-default" />
+
+    <input type="button" class="saveAct btn btn-default" value="Save" />
+    <input type="button" class="deleteAct btn btn-danger" value="X" />
+</div>
+<div class="suppFileElement" style="display: none">
+    <input type="file" name="" class="suppFile" />
+    <input type="hidden" value="" name="" class="numberForFile" />
+</div>
+<div class="suppElement" style="display: none">
+    <label>Номер Доп.Соглашения:</label>
+    <input type="text" name="suppNumbers" class="suppNumber" value="" />
+    <div class="suppFilesForm">
+    </div>
+    <input type="button" name="button" value="Добавить файл" id="btn-suppFile" class="btn btn-default" />
+    <input type="button" class="saveSupp btn btn-default" value="Save" />
+    <input type="button" class="deleteSupp btn btn-danger" value="X" />
+</div>
+<div class="field" style="display: none">
+    <label class="control-label">Тип поля</label>
+    <select asp-items="@Model.Properties" id="propertyId" name="propertyId" class="form-control">
+        <option selected="selected" value="@null">Выберите тип</option>
+    </select>
+    <div class="valueHolder">
+    </div>
+    <p class="divider"></p>
+    <input type="button" name="button" value="х" class="btn btn-default btn-dltfld" />
+    <p class="divider"></p>
+</div>
+@section Scripts {
+    <script>
+<<<<<<< HEAD
+
+=======
+        $(document).on('change', '#propertyId', function () {
+            var propertyId = $(this).val()
+            $(this).next('.valueHolder').empty()
+            if (propertyId == 1) {
+                $(this).next('.valueHolder').append('<label>Значение</label> <input type="text" name="valueProperty" value="" class="form-control" />')
+            }
+            if (propertyId == 2) {
+                $(this).next('.valueHolder').append('<label>Значение</label> <input type="number" name="valueProperty" value="" class="form-control" />')
+            }
+            if (propertyId == 3) {
+                $(this).next('.valueHolder').append('<label>Значение</label> <input type="date" name="valueProperty" value="" class="form-control" />')
+            }
+        });
+>>>>>>> 42ff9bf38237839afb1153cb9356f1542e07c72a
+
+        $(document).ready(function () {
+            var overlay = $('#overlay');
+            var open_modal = $('.open_modal');
+            var close = $('.modal_close, #overlay');
+            var modal = $('.modal_div');
+
+            open_modal.click(function (event) {
+                event.preventDefault();
+                var div = $(this).attr('href');
+                overlay.fadeIn(400,
+                    function () {
+                        $(div)
+                            .css('display', 'block')
+                            .animate({ opacity: 1, top: '50%' }, 200);
+                    });
+            });
+
+            close.click(function () {
+                modal.animate({ opacity: 0, top: '45%' }, 200,
+                    function () {
+                        $(this).css('display', 'none');
+                        overlay.fadeOut(400);
+                    }
+                );
+            });
+        });
+
+        var filesExt = ['doc', 'png', 'docx', 'docm', 'pdf', 'xlsx', 'xlsm', 'xlsb']; // массив расширений
+        $(document).on('change', 'input[type=file]', function () {
+            var parts = $(this).val().split('.');
+            if (filesExt.join().search(parts[parts.length - 1]) == -1) {
+                alert('Не подходящий формат');
+                $(this).val("")
+            }
+        });
+
+        $('#btn-contractFile').click(function () {
+            $(".contractFile:last").clone().appendTo(".contractFilesForm").val("");
+        });
+
+        var actIndex = 0;
+        $(document).on('click', '#btn-actFile', function () {
+            $('.actFileElement:last').clone().appendTo($(this).prev('.actFilesForm')).removeAttr('style')
+            $(this).prev('.actFilesForm').children('.actFileElement:last').children('.actFile').attr('name', 'actFiles[' + actIndex + '].File')
+            $(this).prev('.actFilesForm').children('.actFileElement:last').children('.numberForFile').attr('name', 'actFiles[' + actIndex + '].Number')
+            actIndex++;
+        });
+
+
+        $(document).on('click', '.deleteAct', function () {
+            $(this).parent('.actElement').children('.actNumber').val('$$')
+            $(this).parent('.actElement').css('display', 'none');
+        });
+
+        $(document).on('click', '.saveAct', function () {
+            var actNumber = $(this).parent('.actElement').children('.actNumber').val()
+            $(this).parent('.actElement').find('.numberForFile').val(actNumber)
+            $(this).parent('.actElement').attr('style', 'background-color:gray')
+            $(this).parent('.actElement').children('.actNumber').addClass('disabled').attr('readonly', 'readonly')
+            $(this).parent('.actElement').children('.actFile').css('pointer-events', 'none')
+            $(this).addClass('disabled')
+        });
+
+        var suppIndex = 0;
+        $(document).on('click', '#btn-suppFile', function () {
+            $('.suppFileElement:last').clone().appendTo($(this).prev('.suppFilesForm')).removeAttr('style')
+            $(this).prev('.suppFilesForm').children('.suppFileElement:last').children('.suppFile').attr('name', 'suppFiles[' + actIndex + '].File')
+            $(this).prev('.suppFilesForm').children('.suppFileElement:last').children('.numberForFile').attr('name', 'suppFiles[' + actIndex + '].Number')
+            suppIndex++;
+        });
+
+        $(document).on('click', '.deleteSupp', function () {
+            $(this).parent('.suppElement').children('.suppNumber').val('$$')
+            $(this).parent('.suppElement').css('display', 'none');
+        });
+
+        $(document).on('click', '.saveSupp', function () {
+            var actNumber = $(this).parent('.suppElement').children('.suppNumber').val()
+            $(this).parent('.suppElement').children('.numberForFile').val(actNumber)
+            $(this).parent('.suppElement').attr('style', 'background-color:gray')
+            $(this).parent('.suppElement').children('.suppNumber').addClass('disabled').attr('readonly', 'readonly')
+            $(this).parent('.suppElement').children('.suppFile').css('pointer-events', 'none')
+            $(this).addClass('disabled')
+        });
+
+        $('#btn-supp').click(function () {
+            $('.suppForm').append($('.suppElement:last').clone().removeAttr('style'));
+        })
+
+        $('#btn-act').click(function () {
+
+            $('.actForm').append($('.actElement:last').clone().removeAttr('style'));
+        })
+
+        $(document).on('click', '.btn-dltfld', function () {
+            $(this).parent().remove();
+        });
+
+        $('#btn-contact').click(function () {
+            $(".field:last").clone().removeAttr('style').appendTo(".dinamic").find("input[type='text']").val("");
+        });
+
+        $('#btn-counterparty').click(function () {
+            $('.dropdown').append($('.list:first').clone().attr('id', 'new_id'));
+            $("#btn-delete").show();
+        });
+
+        $(document).ready(function () {
+            $(document).on("click", "a.test", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
+
+        $('#btn-delete').hide();
+        $(document).on('click', '#btn-delete', function () {
+            $(this).parent().parent().remove();
+        });
+
+
+        $('#counterpatyValue').hide();
+        $(document).on('click', '#add', function () {
+            var name = $(this).data('name');
+            var id = $(this).data('id');
+            $('#counterpaty').append($('#counterpatyValue:first').clone());
+            document.getElementById('counterPatyName').value = name;
+            document.getElementById('counterPatyId').value = id;
+            $('#counterpatyValue').show();
+            $('#btn-delete').show();
+
+        });
+
+
+    </script>
+}
+
+
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<CAStest.Models.Individual>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="width:100%; position:absolute; left:0px;">
+    <h2 style="color:#066023; width:70%;" class="bigGreenCaption">Физические лица</h2>
+
+    <div class="controlPanel">
+        <div class='addingButton'><a title="Добавить физическое лицо" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить физическое лицо" class='icon1'></a></div>
+        <div class='tableButton'><a title="Карточками" asp-action="Cards" asp-controller="Individuals"><img src='~/images/material/cards.png' alt="Карточками" class='icon1'></a></div>
+        <div class='search'>
+            @using (Html.BeginForm())
+            {
+                <p>
+                    @Html.TextBox("SearchString")
+                    <button type="submit" title="Поиск" class="btn-link button-icon"><img src='~/images/material/search.png' alt="Поиск" class='searcherImg icon'></button>
+                </p>
+            }
+        </div>
+    </div>
+
+    <br />
+
+    <div class='tableBlock ' style="width:95%">
+        <table class='tableUserList'>
+            <tr class='tableUserListTr'>
+                <th class='tableUserListTh'>@Html.ActionLink("Полное имя", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th class='tableUserListTh'>ИНН</th>
+                <th class='tableUserListTh'>Дата рождения</th>
+                <th class='tableUserListTh'>Паспортные данные</th>
+                <th class='tableUserListTh'>Фактический адрес</th>
+                <th class='tableUserListTh'>Юридический адрес</th>
+                <th class='tableUserListTh'>Должность</th>
+                <th class='tableUserListTh'>Компания</th>
+                <th class='tableUserListTh'>Управление</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class='tableUserListTr'>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Fullname)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Inn)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.PassportData)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.LegalAddress)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                    <td class='tableUserListTd'>
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                    </td>
+                    <td class='tableUserListTd'>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+
+                        @if (User.Claims.FirstOrDefault(c => c.Value == "Admin") != null)
+                        {
+                            if (item.IsBlocked)
+                            {
+                                <form asp-action="unBlock" asp-controller="Individuals" asp-route-id="@item.Id">
+                                    <button  style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Разблокировать"><img src='~/images/material/lock.png' alt="Разблокировать" class='icon3'></button>
+                                </form>
+                                
+                            }
+                            else
+                            {
+                                <form asp-action="Block" asp-controller="Individuals" asp-route-id="@item.Id">
+                                    <button  style="position:relative; top:0px; padding:0px;" type="submit" class="btn-link button-icon blockUnlockBtn" title="Заблокировать"><img src='~/images/material/unlock.png' alt="Заблокировать" class='icon3'></button>
+                                </form>
+                                
+                            }
+                        }
+
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

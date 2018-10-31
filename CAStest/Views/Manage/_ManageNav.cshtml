@@ -1,0 +1,14 @@
+﻿@using CAStest.Views.Manage
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="navigManageBlock">
+    <li class="navigManageBlockButton"><a asp-action="Index">Профиль</a></li>
+    <li class="navigManageBlockButton"><a asp-action="ChangePassword">Пароль</a></li>
+    @if (hasExternalLogins)
+    {
+        <li class="navigManageBlockButton"><a asp-action="ExternalLogins" class="btn-inside-text">Внешние логины</a></li>
+    }
+</ul>
+

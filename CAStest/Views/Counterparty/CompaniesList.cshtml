@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CAStest.Models.Company>
+
+@{
+    ViewData["Title"] = "CompaniesList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список компаний</h2>
+
+<p>
+    <a asp-action="Create">Добавить новую</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Короткое название
+                </th>
+                <th>
+                    ИНН
+                </th>
+                <th>
+                    Факт. адрес
+                </th>
+                <th>
+                    Юр. адрес
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    БИК
+                </th>
+                <th>
+                    Расчетный счет
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyINN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndividualAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LegalAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckingAccount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> @*|
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

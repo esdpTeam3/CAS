@@ -1,0 +1,31 @@
+﻿@model CAStest.Models.ViewModels.ApplicationUserViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<a asp-action="UserList" asp-controller="User" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+
+<h2 style="color:#066023">Пользователь</h2>
+
+<div>
+    <h4>Детальная информация о пользователе</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            Имя
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+        <dt>
+            Логин
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+    </dl>
+</div>
+<br />

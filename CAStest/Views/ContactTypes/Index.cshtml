@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CAStest.Models.ContactType>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#066023">Типы контактов</h2>
+<div class="controlPanel">
+    <div class='addingButton'><a title="Добавить тип контактов" asp-action="Create"><img src='~/images/material/add.png' alt="Добавить тип контактов" class='icon1'></a></div>
+</div>
+
+<div class='tableBlock ' style="width:95%">
+    <table class='tableUserList'>
+        <tr class='tableUserListTr'>
+            <th class='tableUserListTh'>Название</th>
+            <th class='tableUserListTh'>Управление</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class='tableUserListTr'>
+                <td class='tableUserListTd'>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class='tableUserListTd'>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Изменить"><img src='~/images/material/edit.png' alt="Изменить" class='icon3'></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее"><img src='~/images/material/description.png' alt="Подробнее" class='icon3'></a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

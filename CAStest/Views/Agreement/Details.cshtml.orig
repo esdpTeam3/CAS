@@ -1,0 +1,77 @@
+﻿@model CAStest.Models.ContractViewModel.DetailsContractViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Договор</h2>
+
+<div>
+    <h4>Детальная информация</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Номер контракта
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ContractNumber)
+        </dd>
+        <dt>
+            Дата заключения
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.DateOfOffer)
+        </dd>
+        <dt>
+            Дата истечения 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ContractTime)
+        </dd>
+<<<<<<< HEAD
+        @foreach (var item in Model.Contract.ContractProperties)
+            Сторона(ы) договора
+        </dt>
+        <dd>
+            <div id="counterpaty">
+                @foreach (var a in Model.Counterparties)
+                {
+                    string str; 
+                    if (a is Individual i)
+                    {
+                        str = i.Fullname;
+                    }
+                    else if (a is IndividualEntrepreneur ip)
+                    {
+                        str = ip.Fullname;
+                    }
+                    else if (a is Company c)
+                    {
+                        str = c.CompanyName;
+                    }
+                    else
+                    {
+                        str = null;
+                    }
+                    <p>@str</p>
+                }
+            </div>
+        </dd>
+=======
+>>>>>>> parent of 0aa3307... #65 List of contractors for the contract
+        @foreach (var item in Model.Contract.ContractProperties)
+        {
+            <dt>
+                @item.Property.Name
+            </dt>
+            <dd>
+                @item.Value
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Contract.Id">Изменить</a> |
+    <a asp-action="Index">Вернуться к списку</a>
+</div>

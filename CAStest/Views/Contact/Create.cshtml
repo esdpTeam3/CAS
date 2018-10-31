@@ -1,0 +1,46 @@
+﻿@model CAStest.Models.Contact
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href='javascript:history.go(-1)' title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Контакт</h2>
+
+<h4>Добавление нового контакта</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="CounterpartyId" class="hidden" asp-items="@Model.CounterpartyId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactTypeId" class="control-label">Тип контакта</label>
+                <br />
+                <select asp-for="ContactTypeId" class="form-control" asp-items="ViewBag.ContactTypeId"></select>
+            </div>
+            <a asp-action="Create" asp-controller="ContactTypes"><p>Добавить тип контактов</p></a>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label">Контакт</label>
+                <br />
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

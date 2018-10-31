@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CAStest.Models.Counterparty>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#066023">Контрагент</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-sm-7 col-xs-12">
+            <p>
+                <a asp-action="Create">Создать</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> @*|
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

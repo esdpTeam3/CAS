@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Reset authenticator key";
+    ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>Если вы сбросите ключ аутентификатора, ваше приложение-аутентификатор не будет работать, пока вы его не переконфигурируете.</strong>
+    </p>
+    <p>
+        Этот процесс отключает 2FA, пока вы не подтвердите свое приложение-аутентификатор, а также сбросьте коды восстановления 2FA. 
+        Если вы не заполните свою конфигурацию приложения аутентификатора, вы можете потерять доступ к своей учетной записи.
+    </p>
+</div>
+<div>
+    <form asp-action="ResetAuthenticator" method="post" class="form-group">
+        <button class="btn btn-danger" type="submit">Сбросить ключ аутентификатора</button>
+    </form>
+</div>

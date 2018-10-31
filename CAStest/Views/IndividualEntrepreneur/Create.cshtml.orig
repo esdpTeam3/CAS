@@ -1,0 +1,81 @@
+﻿@model CAStest.Models.IndividualEntrepreneurViewModels.CreateIEViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a asp-action="Index" asp-controller="IndividualEntrepreneur" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Индивидуальный предприниматель</h2>
+
+<h4>Создание индивидуального предпренимателя</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fullname" class="control-label">ФИО</label>
+                <br />
+                <input asp-for="Fullname" id="registerInput" />
+                <span asp-validation-for="Fullname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inn" class="control-label">ИНН</label>
+                <br />
+                <input asp-for="Inn" id="registerInput" />
+                <span asp-validation-for="Inn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label">Дата рождения</label>
+                <br />
+                <input asp-for="DateOfBirth" id="registerInput" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassportData" class="control-label">Паспортные данные</label>
+                <br />
+                <input asp-for="PassportData" id="registerInput" />
+                <span asp-validation-for="PassportData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Countries" class="control-label selectCountries">Страна</label>
+                <select id="registerInput" asp-for="Country" asp-items="@Model.Countries">
+                    <option selected="selected" value="@null">Выбрать страну</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Физический Адрес</label>
+                <br />
+                <input asp-for="Address" id="registerInput" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LegalAddress" class="control-label">Юридический Адрес</label>
+                <br />
+                <input asp-for="LegalAddress" id="registerInput" />
+                <span asp-validation-for="LegalAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<<<<<<< HEAD
+                <label asp-for="Countries" class="control-label">Страна</label>
+                <br />
+                <select id="registerInput" asp-for="Country" asp-items="@Model.Countries">
+                    <option selected="selected" value="@null">Выбрать страну</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-default"  style="border:1px solid #CA0039; border-radius:0px; color:#CA0039 " />
+=======
+                <input type="submit" value="Создать" class="btn btn-default" class="btn btn-default" style="border:1px solid #CA0039; border-radius:0px; color:#CA0039 " />
+>>>>>>> 0506c057fbfc31680a8389af759228d97746db82
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

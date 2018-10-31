@@ -1,0 +1,77 @@
+﻿@model CAStest.Models.Company
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a asp-action="Index" asp-controller="Company" title="Назад" style="position:relative; top:25px"><img src='~/images/material/back.png' alt="Назад" class='icon2'></a>
+<br />
+
+<h2>Компания</h2>
+
+<div>
+    <h4>Детальная информация</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Название
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+        <dt>
+            Короткое название
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShortName)
+        </dd>
+        <dt>
+            ИНН
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompanyINN)
+        </dd>
+        <dt>
+            Страна
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            Факт. адрес
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            Фактичесский адрес
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IndividualAddress)
+        </dd>
+        <dt>
+            Юр. адрес
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LegalAddress)
+        </dd>
+        <dt>
+            Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MailAddress)
+        </dd>
+        <dt>
+            БИК
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BIC)
+        </dd>
+        <dt>
+            Расчетный счет
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CheckingAccount)
+        </dd>
+    </dl>
+</div>

@@ -1,0 +1,56 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Редактирование профиля";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+<h4>@ViewData["Title"]</h4>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Login">Логин</label>
+                <br />
+                <input asp-for="Login" id="registerInput" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName">Полное имя</label>
+                <br />
+                <input asp-for="FullName" id="registerInput" placeholder="@ViewData["FullName"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <br />
+                <input asp-for="Email" id="registerInput" placeholder="@ViewData["Email"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DatePassword">Дата смены пароля</label>
+                <br />
+                <input asp-for="DatePassword" id="registerInput" placeholder="@ViewData["DatePassword"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordNotifications">Период за который вы хотите получать уведомления о смене пароля(укажите в днях)</label>
+                <br />
+                <input asp-for="PasswordNotifications" id="registerInput" placeholder="@ViewData["PasswordNotifications"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractNotifications">
+                    Период за который вы хотите получать уведомления о событиях,
+                    связанных с теми договорами которые вы отслеживаете(укажите в днях)
+                </label>
+                <br />
+                <input asp-for="ContractNotifications" id="registerInput" placeholder="@ViewData["ContractNotifications"]" />
+            </div>
+            <button type="submit" class="btn btn-default"  style="border:1px solid #CA0039; border-radius:0px; color:#CA0039 ">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+<h5>@ViewData["Messege"]</h5>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

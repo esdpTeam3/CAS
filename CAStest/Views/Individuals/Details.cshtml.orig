@@ -1,0 +1,103 @@
+﻿@model CAStest.Models.IndividualsViewModel.DetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Детальная информация</h2>
+
+<div>
+    <h4>Физическое лицо</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.Fullname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Fullname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.Inn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Inn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.DateOfBirth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.PassportData)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.PassportData)
+        </dd>
+        <dt>
+<<<<<<< HEAD
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+=======
+            @Html.DisplayNameFor(model => model.Individual.Address)
+>>>>>>> 683bf94a08744cb8cba6aa66c606ef5d32a3846c
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Position)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Individual.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Individual.Company.CompanyName)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Individual.Id">Изменить</a> |
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            ContactType
+        </th>
+        <th>
+            Contact
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Contacts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.ContactType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Value)
+            </td>
+            <td></td>
+        </tr>
+    }
+    <a asp-action="Create" asp-controller="Contact" asp-route-userId="@Model.Individual.Id">Добавить контакт</a>
+
+    </tbody>
+</table>
